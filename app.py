@@ -1,8 +1,18 @@
 import streamlit as st 
+import cv2
 
 st.title("App")
-a = st.number_input("Enter a number: ")
-b = st.number_input("Enter another number: ")
 
-sum = int(a) + int(b)
-st.write("The sum of", a, "and", b, "is:", sum)
+# show the video by webcam
+
+cap = cv2.VideoCapture(0)
+
+while True:
+    ret, frame = cap.read()
+    cv2.imshow("Webcam", frame)
+
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+cap.release()
+cv2.destroyAllWindows()
